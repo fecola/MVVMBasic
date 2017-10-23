@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVVMBasic.View.NovosAlunosView">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="RM:" VerticalOptions="Center" />
+                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtRM" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nome:" VerticalOptions="Center" />
+                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtNome" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email:" VerticalOptions="Center" />
+                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtEmail" />
+            </StackLayout>
+
+            <Button Text="Salvar" HorizontalOptions="CenterAndExpand" x:Name="btnSalvar" Clicked="btnSalvar_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

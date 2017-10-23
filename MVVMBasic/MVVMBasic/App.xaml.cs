@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 using Xamarin.Forms;
 
 namespace MVVMBasic
@@ -13,7 +9,7 @@ namespace MVVMBasic
         {
             InitializeComponent();
 
-            MainPage = new MVVMBasic.MainPage();
+            MainPage = new NavigationPage(new View.AlunoView());
         }
 
         protected override void OnStart()
