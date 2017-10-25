@@ -1,5 +1,6 @@
-﻿using MVVMBasic.ViewModel;
-
+﻿using MVVMBasic.Model;
+using MVVMBasic.ViewModel;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,16 +9,32 @@ namespace MVVMBasic.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AlunoView : ContentPage
     {
-        AlunoViewModel vmAluno;
+        private AlunoViewModel vmAluno { get; set; }
 
-        public AlunoView()
+        public AlunoView(List<Aluno> alunos)
         {
-            //var lAlunos = AlunoViewModel.GetAluno();
-            
-            var aluno = AlunoViewModel.GetAluno();
-            vmAluno = new AlunoViewModel(aluno);
+            vmAluno = new AlunoViewModel(alunos);
             BindingContext = vmAluno;
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            MessagingCenter.Subscribe<List<Aluno>>(this, "FormularioAluno",
+                async (alunos) =>
+                {
+                    var aluno = new Aluno();
+                    await Navigation.PushAsync(new NovosAlunosView(alunos, aluno));
+                });
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<Aluno>(this, "FormularioAluno");
         }
 
     }

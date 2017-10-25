@@ -4,11 +4,21 @@
              x:Class="MVVMBasic.View.AlunoView">
 
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Label Text="Aluno" Font="20" />
-            <Label Text="{Binding Nome}" />
-            <Label Text="{Binding RM}" />
-            <Label Text="{Binding Email}" />
+        <StackLayout Padding="10">
+            <ListView ItemsSource="{Binding Alunos}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Nome}" VerticalTextAlignment="Center" />
+                                <Label Text="{Binding RM}" VerticalTextAlignment="Center" />
+                                <Label Text="{Binding Email}" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Novo Aluno" VerticalOptions="End" Command="{Binding FormularioAluno}"></Button>
         </StackLayout>
     </ContentPage.Content>
 

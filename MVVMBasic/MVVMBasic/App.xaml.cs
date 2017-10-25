@@ -1,4 +1,8 @@
 ﻿
+using MVVMBasic.Model;
+using MVVMBasic.View;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace MVVMBasic
@@ -8,13 +12,22 @@ namespace MVVMBasic
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new View.AlunoView());
+            
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            var Alunos = new List<Aluno>
+            {
+                new Aluno {
+                    Id = Guid.NewGuid(),
+                    RM = "542621",
+                    Nome = "Anderson Silva",
+                    Email = "anderson@ufc.com"
+                }
+            };
+
+            MainPage = new NavigationPage(new AlunoView(Alunos));
         }
 
         protected override void OnSleep()

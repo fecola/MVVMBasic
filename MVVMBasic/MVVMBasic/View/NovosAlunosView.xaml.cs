@@ -2,37 +2,43 @@
 using MVVMBasic.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MVVMBasic.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NovosAlunosView : ContentPage
+    public partial class NovosAlunosView : INotifyPropertyChanged
     {
-        public NovosAlunosView()
+        public ListaAlunoViewModel lNovoAluno { get; set; }
+
+        public NovosAlunosView(List<Aluno> alunos, Aluno aluno)
         {
             InitializeComponent();
+            lNovoAluno = new ListaAlunoViewModel(alunos, aluno);
+            BindingContext = lNovoAluno;
         }
 
-        private void btnSalvar_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
+            base.OnAppearing();
 
-            var aluno = new Aluno()
-            {
-                Id = Guid.NewGuid(),
-                RM = txtRM.Text,
-                Nome = txtNome.Text,
-                Email = txtEmail.Text
-            };
-
-            ListaAlunoViewModel lAluno = new ListaAlunoViewModel();
-            lAluno.Alunos.Add(aluno);
-
+            MessagingCenter.Subscribe<List<Aluno>>(this, "CadastrarAluno",
+                async (alunos) =>
+                {
+                    await DisplayAlert("Sucesso", "Aluno cadastrado com sucesso", "Ok");
+                    await Navigation.PushAsync(new AlunoView(alunos));
+                });
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<List<Aluno>>(this, "CadastrarAluno");
+        }
+        
     }
+
 }

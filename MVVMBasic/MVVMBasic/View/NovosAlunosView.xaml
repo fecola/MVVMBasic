@@ -7,18 +7,18 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="RM:" VerticalOptions="Center" />
-                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtRM" />
+                <Entry Text="{Binding RM}" HorizontalOptions="FillAndExpand" x:Name="txtRM" Keyboard="Numeric" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Nome:" VerticalOptions="Center" />
-                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtNome" />
+                <Entry Text="{Binding Nome}" HorizontalOptions="FillAndExpand" x:Name="txtNome" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Email:" VerticalOptions="Center" />
-                <Entry Text="" HorizontalOptions="FillAndExpand" x:Name="txtEmail" />
+                <Entry Text="{Binding Email}" HorizontalOptions="FillAndExpand" x:Name="txtEmail" Keyboard="Email" />
             </StackLayout>
 
-            <Button Text="Salvar" HorizontalOptions="CenterAndExpand" x:Name="btnSalvar" Clicked="btnSalvar_Clicked"/>
+            <Button Text="Novo Aluno" VerticalOptions="End" Command="{Binding CadastrarAluno}"></Button>
 
         </StackLayout>
     </ContentPage.Content>

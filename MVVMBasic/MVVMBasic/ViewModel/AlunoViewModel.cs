@@ -1,5 +1,8 @@
 ﻿using MVVMBasic.Model;
 using System;
+using System.Collections.Generic;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MVVMBasic.ViewModel
 {
@@ -12,24 +15,31 @@ namespace MVVMBasic.ViewModel
         public string Email { get; set; }
         #endregion
 
-        public AlunoViewModel(Aluno aluno)
-        {
-            this.RM = aluno.RM;
-            this.Nome = aluno.Nome;
-            this.Email = aluno.Email;
-        }
+        public Aluno Aluno { get; set; }
+        public ICommand FormularioAluno { get; set; }
+        public List<Aluno> Alunos { get; set; }
 
-        public static Aluno GetAluno()
-        {
+        //public static Aluno GetAluno()
+        //{
             
-            var aluno = new Aluno()
+        //    var aluno = new Aluno()
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        RM = "542621",
+        //        Nome = "Anderson Silva",
+        //        Email = "anderson@ufc.com"
+        //    };
+        //    return aluno;
+        //}
+
+        public AlunoViewModel(List<Aluno> alunos)
+        {
+            Alunos = alunos;
+
+            FormularioAluno = new Command(() =>
             {
-                Id = Guid.NewGuid(),
-                RM = "542621",
-                Nome = "Anderson Silva",
-                Email = "anderson@ufc.com"
-            };
-            return aluno;
+                MessagingCenter.Send(alunos, "FormularioAluno");
+            });
         }
 
     }
